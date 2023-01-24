@@ -56,10 +56,10 @@
 
 ;; It Also works on bioxiv.org
 ;; example: https://www.biorxiv.org/content/10.1101/2023.01.21.524489v1
-(defun hover_arxiv_abstract ()
+(defun hover-arxiv-abstract ()
   (interactive)
   (let* ((url (thing-at-point 'url))
-         (script-path (expand-file-name "arxiv_abstract.py" (file-name-directory (locate-library "hover_arxiv_abstract"))))
+         (script-path (expand-file-name "arxiv_abstract.py" (file-name-directory (locate-library "hover-arxiv-abstract"))))
          (if (and url (string-match "rxiv" url))
              (let ((output (shell-command-to-string (concat "python3 " script-path " " url))))
                (my-momentarily-small-display-after-line-end output))
