@@ -58,11 +58,13 @@
 ;; example: https://www.biorxiv.org/content/10.1101/2023.01.21.524489v1
 (defun hover_arxiv_abstract ()
   (interactive)
-  (let* ((url (thing-at-point 'url)))
-    (if (and url (string-match "rxiv" url))
-        (let ((output (shell-command-to-string (concat "python3 ~/development/note/arxiv_abstract.py " url))))
-          (my-momentarily-small-display-after-line-end output))
-      (message "No arxiv url found at cursor position."))))
+  (let* ((url (thing-at-point 'url))
+         (script-path (expand-file-name "arxiv_abstract.py" (file-name-directory (locate-library "hover_arxiv_abstract"))))
+         (if (and url (string-match "rxiv" url))
+             (let ((output (shell-command-to-string (concat "python3 " script-path " " url))))
+               (my-momentarily-small-display-after-line-end output))
+           (message "No arxiv url found at cursor position."))))
+
 
 (defun display-image-at-cursor ()
   "Display an image at the cursor position in the current buffer."
@@ -225,5 +227,6 @@
 (defun my-escape-specific-mode ()
   (interactive)
   (my-specific-mode -1))
+
 
 
