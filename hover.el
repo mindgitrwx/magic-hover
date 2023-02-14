@@ -17,6 +17,7 @@
 (setq pos-tip-max-width 220)
 (setq pos-tip-max-height 220)
 
+
 ;; naming is complicated TODO: change it
 (defun my-momentarily-display-after-line-end (string &optional timeout)
   (let ((ov (make-overlay (line-end-position) (line-end-position))))
@@ -227,6 +228,10 @@
 (defun my-escape-specific-mode ()
   (interactive)
   (my-specific-mode -1))
+
+(defun current_time ()
+  (interactive)
+  (my-momentarily-display-after-line-end (shell-command-to-string "date +%T")))
 
 
 
